@@ -1,0 +1,7 @@
+Algoritmo calculadora
+	definir a Como Real
+	Definir b Como Real
+	Definir  operacion como real
+	Escribir "Este programa es una calculadora"
+	Escribir "Elija el primer numero"
+FinAlgoritmo
