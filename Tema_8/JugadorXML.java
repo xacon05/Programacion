@@ -35,7 +35,7 @@ public class JugadorXML {
          transformer.setOutputProperty(OutputKeys.INDENT, "yes");
          transformer.transform(new DOMSource(doc), new StreamResult(new File("jugador.xml")));
 
-         System.out.println("Jugador guardado en jugador.xml");
+         System.out.println("Jugador guardado en Jugador.xml");
 
      } catch (Exception e) {
          System.out.println("Error al guardar XML: " + e.getMessage());
