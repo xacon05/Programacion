@@ -5,7 +5,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class juego { // ← Renombrada con mayúscula inicial por convención
+public class juego { 
     private static Scanner sc = new Scanner(System.in); // Para leer entradas del usuario
     private static Random rand = new Random(); // Para generar eventos aleatorios
 
@@ -103,10 +103,10 @@ public class juego { // ← Renombrada con mayúscula inicial por convención
 
             // Mostrar resultado final del juego y guardar en la base de datos
             if (jugador.haGanado()) {
-                System.out.println("¡Felicidades, " + jugador.getNombre() + "! Has ganado.");
+                System.out.printf("¡Felicidades, %s! Has ganado con %d puntos.%n", jugador.getNombre(), jugador.getPuntos());
                 bd.guardarPartida(jugadorId, jugador.getPuntos(), "ganado");
             } else {
-                System.out.println("¡Lo siento, " + jugador.getNombre() + "! Has perdido.");
+                System.out.printf("¡Lo siento, %s! Has perdido con %d puntos.%n", jugador.getNombre(), jugador.getPuntos());
                 bd.guardarPartida(jugadorId, jugador.getPuntos(), "perdido");
             }
 
