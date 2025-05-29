@@ -14,7 +14,7 @@ public class juego { // Nombre con mayúscula inicial por convención
 
         try {
             System.out.println("¡Bienvenido al Space Invaders!");
-            System.out.println("Introduce tu nombre: ");
+            System.out.print("Introduce tu nombre: ");
             String nombre = sc.nextLine();
 
             bd = new BDManager();
@@ -22,9 +22,9 @@ public class juego { // Nombre con mayúscula inicial por convención
             int jugadorId = bd.buscarJugador(nombre);
             if (jugadorId == -1) {
                 jugadorId = bd.crearJugador(nombre);
-                System.out.println("Nuevo jugador creado.");
+                System.out.printf("Nuevo jugador '%s' creado.%n", nombre);
             } else {
-                System.out.println("Jugador encontrado.");
+                System.out.printf("Jugador '%s' encontrado.%n", nombre);
             }
 
             Jugador jugador = new Jugador(nombre);
@@ -45,8 +45,9 @@ public class juego { // Nombre con mayúscula inicial por convención
                     }
                 }
 
-                System.out.println(jugador);
-                System.out.println(nave);
+                System.out.printf("Jugador: %s | Vidas: %d | Puntos: %d%n",
+                        jugador.getNombre(), jugador.getVidas(), jugador.getPuntos());
+                System.out.printf("Posición de la nave: (%d, %d)%n", nave.getX(), nave.getY());
 
                 System.out.println("Elige una opción:");
                 System.out.println("1. Mover izquierda");
@@ -74,7 +75,7 @@ public class juego { // Nombre con mayúscula inicial por convención
                         case 5:
                             if (rand.nextInt(100) < 30) {
                                 jugador.ganarPuntos(100);
-                                System.out.println("¡Disparo acertado! +100 puntos.");
+                                System.out.printf("¡Disparo acertado! +%d puntos.%n", 100);
                             } else {
                                 System.out.println("¡Disparo fallido!");
                             }
@@ -83,7 +84,7 @@ public class juego { // Nombre con mayúscula inicial por convención
                             System.out.println("Opción inválida.");
                     }
                 } catch (NaveException e) {
-                    System.out.println("Error: " + e.getMessage());
+                    System.out.printf("Error: %s%n", e.getMessage());
                 }
 
                 bd.actualizarJugador(
@@ -97,10 +98,10 @@ public class juego { // Nombre con mayúscula inicial por convención
 
             // Mostrar resultado y guardar en BD y archivo XML
             if (jugador.haGanado()) {
-                System.out.println("¡Felicidades, " + jugador.getNombre() + "! Has ganado.");
+                System.out.printf("¡Felicidades, %s! Has ganado con %d puntos.%n", jugador.getNombre(), jugador.getPuntos());
                 bd.guardarPartida(jugadorId, jugador.getPuntos(), "ganado");
             } else {
-                System.out.println("¡Lo siento, " + jugador.getNombre() + "! Has perdido.");
+                System.out.printf("¡Lo siento, %s! Has perdido con %d puntos.%n", jugador.getNombre(), jugador.getPuntos());
                 bd.guardarPartida(jugadorId, jugador.getPuntos(), "perdido");
             }
 
@@ -112,7 +113,7 @@ public class juego { // Nombre con mayúscula inicial por convención
         } catch (ConcurrentModificationException e) {
             System.out.println("Error al modificar la lista de meteoros.");
         } catch (Exception e) {
-            System.out.println("Ha ocurrido un error inesperado: " + e.getMessage());
+            System.out.printf("Ha ocurrido un error inesperado: %s%n", e.getMessage());
             e.printStackTrace();
         } finally {
             if (bd != null) {
